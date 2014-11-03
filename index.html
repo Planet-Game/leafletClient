@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="height=device-height, initial-scale=1, user-scalable=no">
+<title>모바일 전단지</title>
+<link rel="stylesheet" href="resources/css/normalize.css">
+<link rel="stylesheet" href="resources/css/default.css">
+<style>
+
+</style>
+<script src="jquery-1.11.0.js"></script>
+<script src="animation.js"></script>
+<script src="interface.js"></script>
+</head>
+<body>
+<div class="leaf">
+<!-- page-list: 목록보기 || page-view: 상세보기 -->
+<!-- motion-2d: 하드웨어 가속 미지원 || motion-3d: 하드웨어 가속 지원 -->
+    <header class="leaf-header">
+        <h1>모바일 전단지</h1>
+    </header>
+
+    <section class="item point-after" id="section-1">
+    <!-- point-before || point-after -->
+        <a href="#section-1">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.smoothieking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.smoothieking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+
+    <section class="item point-after" id="section-2">
+    <!-- point-before || point-after -->
+        <a href="#section-2">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.burgerking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.burgerking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+    <section class="item point-after" id="section-3">
+    <!-- point-before || point-after -->
+        <a href="#section-3">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.retro.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.retro.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+    <section class="item point-after" id="section-4">
+    <!-- point-before || point-after -->
+        <a href="#section-4">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.smoothieking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.smoothieking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+
+    <section class="item point-after" id="section-5">
+    <!-- point-before || point-after -->
+        <a href="#section-5">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.burgerking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.burgerking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+    <section class="item point-after" id="section-6">
+    <!-- point-before || point-after -->
+        <a href="#section-6">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.retro.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.retro.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+
+    <section class="item point-after" id="section-7">
+    <!-- point-before || point-after -->
+        <a href="#section-7">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.smoothieking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.smoothieking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+    <section class="item point-after" id="section-8">
+    <!-- point-before || point-after -->
+        <a href="#section-8">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.burgerking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.burgerking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+    <section class="item point-after" id="section-9">
+    <!-- point-before || point-after -->
+        <a href="#section-9">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <div class="point-missed">
+                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+                </div>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img src="resources/img/item.retro.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img src="resources/img/F_08.png" alt="십센치 판교점"></span></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-before-icon">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-after-icon">
+                    <strong>적립완료</strong>
+                </div>
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img src="resources/img/item.retro.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+            <footer class="item-footer">
+                <p class="point-before-msg">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-after-msg">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
+        </a>
+    </section>
+
+    <footer class="leaf-footer">
+    </footer>
+</div>
+</body>
+</html>
