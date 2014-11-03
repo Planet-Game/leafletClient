@@ -1,6 +1,7 @@
-Title: leaflet client for Syrup store
-Owner: Wook Shim (wshim@sk.com)
-License: SK planet wholly owned
+[개 요]
+- Title: leaflet client for Syrup store
+- Owner: Wook Shim (wshim@sk.com)
+- License: SK planet wholly owned
 
 [저장소]
 - https://github.com/wshim/leafletClient
