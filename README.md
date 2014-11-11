@@ -35,6 +35,7 @@
 - 기타 애니메이션 관련 코드 안정화
 
 [v 0.9 수정사항, 2014/11/11]
+- Lazyload 기능 구현(document ready 후 data-url을 src url로 순차적으로 변경)
 - 매장 전단 별도페이지 제작(index-sub.html, animation-sub.js, interface-sub.js, resources/css/default-sub.css)
 - 애니메이션 미지원 단말 분기코드 안정화(subpage scroll을 제외한 CSS transform까지 완전 제거)
 - 1차 내부 QA 관련 버그 수정 및 안정화(CSS 오류, 스크롤러 관련 오류, 성능 최적화 등)
