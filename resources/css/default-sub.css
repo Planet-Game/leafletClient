@@ -31,9 +31,6 @@ body{
 body.expanded{
     /*overflow:hidden; removed due to galaxy s1 bug*/
 }
-body.ios{
-    overflow:hidden;
-}
 img{
     max-width:100%;
     /*height:auto;*/
@@ -54,38 +51,12 @@ dd{
     left:0;
     overflow-x:visible;
 }
-.ios .leaf{
-    overflow-y:auto;
-    -webkit-overflow-scrolling: touch; /*for iOS flip animation while scrolling*/
-}
-.leaf-header{
-    overflow:hidden;
-    position:relative;
-    width:100%;
-    text-align:center;
-    padding:2.98% 0 0 0;
-    z-index:15;
-}
-.leaf-header>h1{
-    margin:0;
-    position:absolute;
-    width:100%;
-    height:1px;
-    overflow:hidden;
-}
-
 /* item */
 .item{
     margin-bottom:2.085%;
     position:relative;
     background:#fff;
     opacity:1;
-}
-.item.prepare3d{
-    top:0;
-    width:95%;
-    left:2.78%;
-    position:absolute;
 }
 .item>.wrap{
     color:#000;
@@ -276,9 +247,6 @@ dd{
     box-shadow:0 0 3px rgba(0,0,0,.3);
     overflow:hidden;
 }
-.flipping .item-body{
-    box-shadow:none;
-}
 .complete .item-body{
     background-color:black;
 }
@@ -449,181 +417,6 @@ dd{
     background-color:#e6e6e6;
     border-top:0.35em solid white;
 }
-
-/* page flip area */
-.item-footer .flip-area{
-    width:35.85%;
-    height:106.25%;
-    position:absolute;
-    bottom:0;
-    right:0;
-    z-index:5;
-    background-size:100% 2500%;
-    background-position:0 0;
-    background-image:url(../img/flip.png);
-    display:none;
-}
-.ios .item-footer .flip-area{ /* for iOS width 320px*/
-    height:107.35%;
-}
-.enable-anim .item-footer .flip-area{
-    display:block;
-}
-.item-footer .flip-bg{
-    position: absolute;
-    background-color: #e6e6e6;
-    width: 100%;
-    padding-bottom: 14%;
-    bottom: 0;
-}
-.expand .flip-area,
-.expand .loaded .flip-area,
-.expand .point-msg-before{
-    display:none;
-}
-.point-msg-before,
-.point-msg-after{
-    position:absolute;
-    top:0;
-    width:100%;
-    height:100%;
-    font-size:1.4rem;
-    letter-spacing:-0.05rem;
-    text-indent:1rem;
-    line-height:390%;
-    white-space:nowrap;
-    z-index:10;
-    background-color:white;
-}
-.enable-anim .loaded .point-msg-before,
-.enable-anim .loaded .point-msg-after{
-    width:64.585%;
-}
-.point-msg-before strong{
-    color:rgba(240,100,10,.7);
-    text-decoration:underline;
-}
-.expand .point-msg-before,
-.expand .point-msg-after{
-    width:100%;
-}
-.expanded .point-msg-before,
-.expanded .point-msg-after{
-    display:none;
-}
-.item-info{
-    position:relative;
-    overflow:hidden;
-    font-size:1.2rem;
-    height:100%;
-    width:100%;
-    top:0;
-    left:0;
-    padding: 0;
-    display:none;
-}
-.expanded .item-info{
-    height:15%;
-    display:block;
-}
-
-/* point-before, point-missed, point-after */
-.point-icon-after,
-.point-msg-after,
-.complete .point-icon-before,
-.complete .point-msg-before{
-    display:none;
-    margin:0;
-}
-.expand .point-icon-before{
-    display:none;
-}
-.point-icon-before,
-.point-msg-before,
-.complete .point-icon-after,
-.complete .point-msg-after{
-    display:block;
-}
-.complete.expand .point-icon-after,
-.complete.expand .point-msg-after{
-    display:none;
-}
-.point-icon-before{
-    position: absolute;
-    top: 2.244%;
-    right: 1.535%;
-    width: 14.42%;
-    height: 21.08%;
-    background: rgba(240,100,10,.7);
-    text-align: center;
-    line-height: 0;
-    font-size: 1.2rem;
-    color: #fff;
-    border-radius: 200px;
-    z-index: 10;
-}
-
-.visited .point-missed{
-    display:block;
-}
-.visited.complete .point-missed,
-.expand .point-missed{
-    display:none;
-}
-.point-missed{
-    top: 0;
-    left: 9.82%;
-    right: 9.82%;
-    width: 80.36%;
-    height: 24.91%;
-    z-index: 15;
-    position: absolute;
-    color: white;
-    background-color: black;
-    border-radius: 0.3em;
-    font-size:1.5rem;
-    opacity: 0.82;
-    display: none;
-}
-.point-missed p{
-    padding-top:2%;
-    text-align: center;
-    line-height: 190%;
-}
-.point-icon-before strong{
-    font-size: 1.4rem;
-    line-height: 230%;
-}
-.point-icon-after{
-    position: absolute;
-    width: 33.44%;
-    height: 16.595%;
-    top: 33.19%;
-    left: 0;
-    right: 0;
-    border: 2px solid #fff;
-    background: rgba(0,0,0,.7);
-    line-height: 280%;
-    margin: auto;
-    border-radius: 2rem;
-    color: #fff;
-    font-size: 1.4rem;
-    z-index: 10;
-    text-align: center;
-}
-.leaf-footer{
-    padding-bottom:10%;
-}
-.ios .leaf-footer{
-    padding-bottom:30%;
-}
-.leaf-footer.expand{
-    padding-bottom:130%;
-}
-.leaf-footer img{
-    display:none;
-}
-
 /* Coupon */
 .item-coupon{
     padding:0.8rem;

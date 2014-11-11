@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
+<title>매장 전단</title>
+<!-- <link rel="stylesheet" href="resources/css/normalize.css"> -->
+<link rel="stylesheet" href="resources/css/default-sub.css">
+<style>
+
+</style>
+<script src="jquery-1.11.0.js"></script>
+<script src="animation-sub.js"></script>
+<script src="interface-sub.js"></script>
+</head>
+<body>
+<div class="leaf">
+    <section class="item" id="section-1">
+        <div class="wrap">
+            <header class="item-header">
+                <h2>
+                    스무디킹 판교점
+                </h2>
+                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
+                <nav class="pagination">
+                    <button type="button" class="prev">이전 전단지 보기</button>
+                    <button type="button" class="next">다음 전단지 보기</button>
+                    <ol class="thumb-list-first">
+                        <li class="thumb"><span><img data-src="resources/img/item.smoothieking.png" alt="사오정 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/coupon.jpg" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_01.png" alt="오징어 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_02.png" alt="육계장 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_03.png" alt="육계장 판교점"></span></li>
+                    </ol>
+                    <ol class="thumb-list-second">
+                        <li class="thumb"><span><img data-src="resources/img/F_04.png" alt="칠칠이 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_05.png" alt="팔팔이 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_06.png" alt="구구단 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_07.png" alt="십센치 판교점"></span></li>
+                        <li class="thumb"><span><img data-src="resources/img/F_08.png" alt="십센치 판교점"></span><strong>50P</strong></li>
+                    </ol>
+                </nav>
+            </header>
+            <div class="item-body">
+                <div class="point-icon-before">
+                    <strong>50P</strong><br>적립
+                </div>
+                <div class="point-icon-after">
+                    <strong>적립완료</strong>
+                </div>
+
+                <dl class="check-visit">
+                    <img src="resources/img/icon_visit.png" alt="방문확인">
+                    <dt>방문확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <dl class="check-barcode">
+                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
+                    <dt>바코드확인</dt>
+                    <dd>적립완료</dd>
+                </dl>
+                <button type="button" class="prev-img">이전 이미지 보기</button>
+                <button type="button" class="next-img">다음 이미지 보기</button>
+                <ul class="item-body-list">
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/item.smoothieking.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <!-- 쿠폰 -->
+                        <article class="item-coupon">
+                            <div class="coupon-desc">
+                                <div class="thumb"><img class="coupon-img" src="resources/img/coupon.jpg" width="100%" alt=""></div>
+                                <h2>음료 에이드와 포테이토 3,000원 할인권</h2>
+                                <p class="price">무료</p>
+                                <dl>
+                                    <dt>유효기간</dt>
+                                    <dd>2014.05.31 까지</dd>
+                                    <dt>사용처</dt>
+                                    <dd>베니건스 전지점</dd>
+                                </dl>
+                            </div>
+                            <button type="button" class="btn-get-coupon">쿠폰받기</button>
+                            <h3>이용안내</h3>
+                            <ul>
+                                <li>● 이용안내 : 2만원 이상 결제시 사용가능, 타 쿠폰과 함께 사용불가, 테이블 당 1매</li>
+                                <li>● 2만원 이상 결제 시 사용가능합니다.</li>
+                                <li><img src="resources/img/coupon.png" alt=""></li>
+                                <li><a href="#">제품정보 보러가기</a> &gt;</li>
+                            </ul>
+                        </article>
+                        <!-- /쿠폰 -->
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_01.png">
+                        <img data-src="resources/img/F_01.png">
+                        <img data-src="resources/img/F_01.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_02.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_03.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_04.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_05.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_06.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_07.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                    <li class="item-body-listitem">
+                        <img data-src="resources/img/F_08.png">
+                        <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
+                    </li>
+                </ul>
+                <div class="item-body-button">
+                    <input type="button" class="btn-call" value="전화걸기">
+                    <input type="button" class="btn-view" value="매장보기">
+                    <input type="button" class="btn-scrap" value="스크랩하기">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

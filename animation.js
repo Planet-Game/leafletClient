@@ -17,7 +17,9 @@
 
 		enableAnim: false,
 
-		noHash: false,
+		hashed: false,
+
+		hashId: "leaflet",
 
 		iOS: false,
 
@@ -47,6 +49,8 @@
 
 		sliding: false,
 
+		transitioning: false,
+
 		itemIndex: 0,
 
 		itemTx: 0,
@@ -55,13 +59,13 @@
 
 		bodyWidth: 330,
 
-		minScroll: 20,
+		minScroll: 10,
 
-		minSliding: 40,
+		minSliding: 10,
 
 		transTimer: null,
 
-		transDuration: 500
+		transDuration: 350
 	};
 
 	var touch = {
@@ -129,7 +133,9 @@
 		$selectedList,
 		$selectedListitem,
 		$selectedListitems,
-		$selectedItemFooter;
+		$selectedItemFooter,
+		$selectedItemsPrev,
+		$selectedItemsNext;
 
 
 	$document.ready( function() {
@@ -137,21 +143,21 @@
 		leaf.checkDevice();
 		leaf.initVars();
 		leaf.bindEvents();
+		leaf.loadImages();
 
 		if( leaf.iOS ) {
 			$body.addClass( "ios" );
-			bouncefix.add("leaf");
+			bouncefix.add( "leaf" );
 			$scroll = $leaf;
 		} else {
 			$scroll = $body;
 		}
 
 		if( leaf.enableAnim ) {
-			$leaf.addClass( "enableAnim" );
+			$leaf.addClass( "enable-anim" );
 			leaf.setFlipAnimation();
 		} else {
 			main.transDuration = 0;
-			main.scrollDuration = 0;
 			sub.transDuration = 0;
 		}
 	});
@@ -165,7 +171,7 @@
 			index = ua.indexOf( "Android" ) + 8;
 			version = ua.slice( index, index + 3 ).split( "." ); //[ "4", "3" ]
 
-			if( version[ 0 ] >= 4 && version[ 1 ] >= 2 ) {
+			if( version[ 0 ] >= 4 && version[ 1 ] >= 3 ) {
 				leaf.enableAnim = true;
 			}
 		} else if( ua.indexOf( "iPhone") || ua.indexOf( "iPad" ) ) {
@@ -188,7 +194,6 @@
 		$itemHeader = $( ".item-header" );
 		$itemBody = $( ".item-body" );
 		$itemBodyList = $( ".item-body-list" );
-		$itemPage = $( ".item-page" );
 		$flipArea = $( ".flip-area" );
 		$itemFooter = $( ".item-footer" );
 		$itemBodyListitem = $( ".item-body-listitem" );
@@ -231,27 +236,38 @@
 			touch.ox = Math.max( touch.ox - sub.itemWidth, -sub.bodyWidth );
 			leaf.transLeaf();
 		});
+
+		$( ".leaf-footer img" ).load(function() { //to hide grey area while loading flip bg image
+			if( leaf.enableAnim ) {
+				$itemFooter.addClass( "loaded" );
+			}
+		});
+	};
+
+	leaf.loadImages = function() {
+
+		changeDataSrc( ".item-body-listitem img:first" ); //first image
+		changeDataSrc( ".pagination ol img" ); //thumbnail images
+		changeDataSrc( ".item-body-listitem img" ); //remaining images
+		changeDataSrc( ".leaf-footer img" ); //flip bg
+
+		function changeDataSrc( selector ) {
+			var $image;
+
+			$( selector ).each(function() {
+				$image = $( this );
+
+				if( $image.attr( "src") !== $image.attr( "data-src") ) { //prevent duplicate change
+					$image.attr( "src", $image.attr( "data-src" ) );
+				}
+			});
+		}
 	};
 
 	leaf.setFlipAnimation = function() {
 		if( leaf.enableAnim ) {
 			if( !leaf.iOS ) {
 				main.flipInterval = setInterval( flipInterval, 100 );
-
-				function flipInterval() {
-					if( touch.scrolls.length > 20 ) {
-						touch.scrolls = touch.scrolls.slice( -5 );
-					}
-
-					touch.scrolls.push({
-						time: Date.now(),
-						scroll: $scroll.scrollTop()
-					});
-
-					if( getScrollVelocity() > leaf.scrollThreshold ) {
-						flip.playQueue.fill();
-					}
-				}
 			} else {
 				$leaf.on( start, function() {
 					touch.scrolls = [];
@@ -267,6 +283,21 @@
 						flip.playQueue.fill();
 					}
 				});
+			}
+		}
+
+		function flipInterval() {
+			if( touch.scrolls.length > 20 ) {
+				touch.scrolls = touch.scrolls.slice( -5 );
+			}
+
+			touch.scrolls.push({
+				time: Date.now(),
+				scroll: $scroll.scrollTop()
+			});
+
+			if( getScrollVelocity() > leaf.scrollThreshold ) {
+				flip.playQueue.fill();
 			}
 		}
 	};
@@ -286,16 +317,20 @@
 	leaf.expandItem = function() {
 		beforeExpansion();
 
-		$scroll.animate({
-				scrollTop: leaf.scrollTop
-			}, main.scrollDuration,
-			onExpansion
-		);
+		if( leaf.enableAnim ) {
+			$scroll.animate({
+					scrollTop: leaf.scrollTop
+				}, main.scrollDuration,
+				onExpansion
+			);
+		} else {
+			$scroll.scrollTop( leaf.scrollTop );
+			onExpansion();
+		}
 
-		//local functions
+		//local functions for expansion
 		function beforeExpansion() {
 			main.expanded = true;
-
 
 			if( !leaf.iOS ) {
 				leaf.scrollTop = $selectedItem.position().top;
@@ -303,7 +338,11 @@
 				leaf.scrollTop = $leaf.scrollTop() + $selectedItem.position().top;
 			}
 
-			// alert( leaf.scrollTop );
+			if( !leaf.hashed ) {
+				location.hash = leaf.hashId;
+				leaf.hashed = true;
+				// $scroll.scrollTop( leaf.scrollTop );
+			}
 
 			$leafFooter.addClass( "expand" );
 
@@ -314,33 +353,32 @@
 
 		function onExpansion() {
 			setSelected();
-			locate3d();
 
 			$( $selectedThumbnail.get( 0 ) ).addClass( "active" );
 			if ( $selectedListitems.length >= 6 ) { //highlight next arrow button
 				$selectedPagination.addClass( "highlight" );
 			}
 
-			$selectedItem.addClass( "selected expand" );//start expand transition
-			// $items.not( ".selected" ).css( "opacity", "0" ); //hide other leaflets
+			if( leaf.enableAnim ) {
+				locate3d();
 
-			if( !leaf.noHash ) {
-				location.hash = $this.attr( "href" ); //update hash history
-				// $leaf.scrollTop( leaf.scrollTop );
-			}
+				$selectedItem.addClass( "selected expand" );//start expand transition
 
-			setTimeout(function() {
-				if( leaf.enableAnim ) {
+				setTimeout(function() {
 					$selectedItemFooter.css({
 					    "-webkit-transition": "-webkit-transform " + ( main.transDuration / 1000 ) + "s",
+					   	"-webkit-transform": "translateY(99%)"
 					});
-				}
-				$selectedItemFooter.css({
-				    "-webkit-transform": "translateY(99%)"
-				});
-			}, 10 );
+				}, 10 );
+
+
+			} else {
+				$selectedItemFooter.css( "display", "none" );
+				$selectedItem.addClass( "selected expand" );//start expand transition
+			}
 
 			setTimeout( afterExpansion, main.transDuration );
+
 
 			function setSelected() {
 				$selectedPagination = $this.find( ".pagination" );
@@ -350,11 +388,12 @@
 				$selectedListitems = $selectedList.find( ".item-body-listitem" );
 				$selectedListitem = $( $selectedListitems[ 0 ] );
 				$selectedItemFooter = $this.find( ".item-footer" );
+				$selectedItemsPrev = $selectedItem.prevAll( ".item" );
+				$selectedItemsNext = $selectedItem.nextAll( ".item" );
 			}
 
 			function locate3d() {
-				$selectedItem.prevAll( ".item" ).css( "opacity", "0" );
-				$selectedItem.nextAll( ".item" ).each(function() {
+				$selectedItemsNext.each(function() {
 					var $item = $( this );
 
 					if( !leaf.iOS) {
@@ -368,7 +407,7 @@
 					});
 				});
 
-				$selectedItem.nextAll( ".item" ).addClass( "prepare3d" ).each(function() {
+				$selectedItemsNext.addClass( "prepare3d" ).each(function() {
 					var $item = $( this );
 
 					$item.css({
@@ -381,16 +420,25 @@
 
 		function afterExpansion() {
 			$body.addClass( "expanded" ); //prepare body for expand transition(overflow-y:hidden)
-
 			sub.bodyWidth = ( $selectedListitems.length - 1 ) * sub.itemWidth;
-			sub.itemTx = 0;
 
-			$selectedListitems.addClass( "display" ).each( function() {
-				$( this ).data( "tx", sub.itemTx );
-				$( this ).css( "-webkit-transform",  "translate3d( " + sub.itemTx + "px, 0, 0 )" );
-				sub.itemTx += sub.itemWidth;
-			});
+			if( leaf.enableAnim ) {
+				sub.itemTx = 0;
 
+				$selectedListitems.addClass( "display" ).each( function() {
+					$( this ).data( "tx", sub.itemTx );
+					$( this ).css( "-webkit-transform",  "translate3d( " + sub.itemTx + "px, 0, 0 )" );
+					sub.itemTx += sub.itemWidth;
+				});
+
+				$selectedItemsPrev.css( "opacity", "0" );
+				$selectedItemsNext.css( "opacity", "0" );
+			} else {
+				$selectedItemsPrev.css( "visibility", "hidden" ); //To be fixed
+				$selectedItemsNext.css( "display", "none" );
+			}
+
+			leaf.checkCompleted();
 			leaf.animating = false;
 		}
 	};
@@ -403,29 +451,40 @@
 		//local functions
 		function beforeShrink() {
 			touch.ox = 0; //reset list-item position
-
-			unlocate3d();
+			sub.itemIndex = 0;
 
 			$body.removeClass( "expanded" );
 			//shrink transition(reverse of expand)
-			$selectedList.css( "-webkit-transform", "translate3d( 0, 0, 0 )" );
-			$selectedListitems.removeClass( "display" ); //hide list-item
+			if( leaf.enableAnim ) {
+				unlocate3d();
+
+				$selectedList.css( "-webkit-transform", "" );
+				$selectedListitems.css( "-webkit-transform", "" );
+				$selectedItemFooter.css({
+					"-webkit-transform": "translateY(50%)"
+				});
+				$selectedListitems.removeClass( "display" ); //hide list-item
+
+				$selectedItemsPrev.css( "opacity", "" );
+				$selectedItemsNext.css( "opacity", "" );
+			} else {
+				$selectedItemFooter.css( "display", "block" );
+				$selectedListitems.css( "display", "" );
+
+				$selectedItemsPrev.css( "visibility", "visible" );
+				$selectedItemsNext.css( "display", "block" );
+			}
+
 			$selectedPagination.removeClass( "shift" ); //reset pagination
 			$selectedThumbnail.removeClass( "active" );
 			$selectedItem.removeClass( "selected" );
-			$selectedItemFooter.css({
-			    "-webkit-transform": "translateY(50%)"
-			});
-
-			if( !leaf.noHash ) {
-				location.hash = ""; //update hash history
-			}
 
 			$scroll.scrollTop( leaf.scrollTop ); //recover scrollTop changed by empty hash
 			$leafFooter.removeClass( "expand" );
 
 			function unlocate3d() {
-				$selectedItem.nextAll( ".item" ).each(function() {
+
+				$selectedItemsNext.each(function() {
 					$( this ).css({
 						"-webkit-transform": "translateY(" + $( this ).data( "ty" ) + "px)"
 					});
@@ -434,25 +493,27 @@
 		}
 
 		function afterShrink() {
-			$items.removeClass( "prepare3d" ).css({
-				"-webkit-transition": "",
-				"-webkit-transform": ""
-			});
+			if( leaf.enableAnim ) {
+				$items.removeClass( "prepare3d" ).css({
+					"-webkit-transition": "",
+					"-webkit-transform": ""
+				});
 
-			$selectedItemFooter.css({
-			    "-webkit-transition": "",
-			    "-webkit-transform": ""
-			});
+				$selectedItemFooter.css({
+				    "-webkit-transition": "",
+				    "-webkit-transform": ""
+				});
+
+				leaf.setFlipAnimation();
+			}
 
 			$selectedItem.removeClass( "expand" );
-			$items.not( ".selected" ).css( "opacity", "1" );
+			$items.not( ".selected" ).css( "display", "block" );
 
 			resetSelected();
 
 			main.expanded = false;
 			leaf.animating = false;
-
-			leaf.setFlipAnimation();
 
 			$selectedItem.addClass( "visited" );
 
@@ -464,25 +525,17 @@
 				$selectedListitems = null;
 				$selectedListitem = null;
 				$selectedItemFooter = null;
+				$selectedItemsPrev = null;
+				$selectedItemsNext = null;
 			}
 		}
 	};
 
 	$( window ).on( "hashchange", function() {
 
-		if( !leaf.animating ) { //hashchange by back button
-			leaf.noHash = true;
-
-			if( location.hash === "" ) {
-				leaf.shrinkItem();
-
-			} else {
-				$selectedItem = $( location.hash );
-				$this = $selectedItem.children( "a" );
-				leaf.expandItem();
-			}
-
-			leaf.noHash = false;
+		if( !leaf.animating && main.expanded ) { //hashchange by back button
+			leaf.hashed = false;
+			leaf.shrinkItem();
 		}
 	});
 
@@ -503,7 +556,7 @@
 
 	$document.on( move, function( e ) {
 
-		if( !leaf.animating ) {
+		if( !leaf.animating && !sub.transitioning ) {
 			touch.pos = hasTouch? e.originalEvent.changedTouches[ 0 ] : e;
 			touch.mx = touch.pos.clientX;
 			touch.my = touch.pos.clientY;
@@ -518,7 +571,7 @@
 		if( main.expanded && touch.mx ) {
 			e.preventDefault(); //to prevent scrolling on various android
 
-			if( $( e.target ).parents( ".item-body-list" ).length !== 0 ) { //subpage swipe & scroll
+			if( !sub.transitioning && $( e.target ).parents( ".item-body" ).length !== 0 ) { //subpage swipe & scroll
 
 				if( sub.sliding === false ) {
 					if( sub.scrolling ) {
@@ -528,12 +581,14 @@
 							sub.scrolling = true;
 						} else if( Math.abs( touch.mx - touch.sx ) > sub.minSliding ) {
 							sub.sliding = touch.mx;
-							// $selectedListitems.addClass( "sliding" );
 						}
 					}
 				} else {
 					touch.tx = Math.max( -sub.bodyWidth, Math.min( touch.ox + touch.mx - sub.sliding, 0 ) );
-					$selectedList.css( "-webkit-transform", "translate3d( " + touch.tx + "px, 0, 0 )" );
+
+					if( leaf.enableAnim ) {
+						$selectedList.css( "-webkit-transform", "translate3d( " + touch.tx + "px, 0, 0 )" );
+					}
 				}
 			}
 		}
@@ -543,7 +598,11 @@
 				minY = $selectedBody.innerHeight() - $selectedListitem.innerHeight();
 
 			touch.ty = Math.max( minY, Math.min( 0, touch.oy + touch.my - touch.sy ) );
-			$selectedListitem.css( "-webkit-transform", "translate3d( " + $selectedListitem.data( "tx" ) + "px, " + touch.ty + "px, 0 )" );
+			if( leaf.enableAnim ) {
+				$selectedListitem.css( "-webkit-transform", "translate3d( " + $selectedListitem.data( "tx" ) + "px, " + touch.ty + "px, 0 )" );
+			} else {
+				$selectedListitem.css( "-webkit-transform", "translateY( " + touch.ty + "px )" );
+			}
 		}
 	});
 
@@ -583,32 +642,36 @@
 	});
 
 
-	leaf.transLeaf = function() {
+	leaf.transLeaf = function( dir ) {
 
 		if( touch.ox !== touch.tx ) {
+
+			touch.tx = touch.ox;
+			sub.itemIndex = -touch.ox / sub.itemWidth;
+			$selectedListitem = $( $selectedListitems[ sub.itemIndex ] );
 
 			if( leaf.enableAnim ) {
 				clearTimeout( sub.transTimer );
 
-				$selectedList.css({
-					"-webkit-transition": "-webkit-transform 0.4s",
-				});
+				sub.transitioning = true;
+				$selectedList.css( "-webkit-transition", "-webkit-transform " + sub.transDuration / 1000 + "s" );
 
 				sub.transTimer = setTimeout( function() {
+					sub.transitioning = false;
 					$selectedList.css( "-webkit-transition", "" );
 				}, sub.transDuration );
+
+				$selectedList.css({
+					"-webkit-transform": "translate3d(" + touch.ox + "px, 0, 0 )"
+				});
+			} else {
+				$selectedListitems.css( "display", "none" );
+				$selectedListitem.css( "display", "block" );
 			}
-
-			$selectedList.css({
-				"-webkit-transform": "translate3d(" + touch.ox + "px, 0, 0 )"
-			});
-
-			sub.itemIndex = -touch.ox / sub.itemWidth;
-			$selectedListitem = $( $selectedListitems[ sub.itemIndex ] );
 
 			checkActivated();
 			checkShifted();
-			checkCompleted();
+			leaf.checkCompleted();
 		}
 
 		function checkActivated() {
@@ -623,11 +686,11 @@
 				$selectedPagination.removeClass( "shift" );
 			}
 		}
+	};
 
-		function checkCompleted() {
-			if( sub.itemIndex === $selectedListitems.length - 1 ) {
-				$document.trigger( "viewComplete" );
-			}
+	leaf.checkCompleted = function() {
+		if( sub.itemIndex === $selectedListitems.length - 1 ) {
+			$document.trigger( "viewComplete" );
 		}
 	};
 
@@ -739,7 +802,6 @@
 
 			if( player.direction !== "none" ) {
 				flip.interval = setInterval(function() {
-
 					$items.addClass( "flipping" );
 
 					if( flip.currentFrame !== player.to ) {
@@ -762,14 +824,16 @@
 		stop: function( delay, callback ) {
 			setTimeout(function() {
 				clearInterval( flip.interval );
-				if( callback ) callback();
+				if( callback ) {
+					callback();
+				}
 			}, delay );
 		},
 
 		forward: function( duration ) {
 			flip.interval = setInterval(function() {
 				flip.currentFrame = ( flip.currentFrame + 1 ) % 25;
-				this.setFrame( flip.currentFrame )
+				this.setFrame( flip.currentFrame );
 			}, flip.frameDuration );
 
 			this.stop( duration || ( frameLength - flip.currentFrame - 1 ) * flip.frameDuration );
