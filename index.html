@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no">
 <title>모바일 전단지</title>
-<!-- <link rel="stylesheet" href="resources/css/normalize.css"> -->
 <link rel="stylesheet" href="resources/css/default.css">
 <style>
 
@@ -19,6 +18,9 @@
 <!-- motion-2d: 하드웨어 가속 미지원 || motion-3d: 하드웨어 가속 지원 -->
     <header class="leaf-header">
         <h1>모바일 전단지</h1>
+        <div class="point-missed">
+            <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
+        </div>
     </header>
 
     <section class="item" id="section-1">
@@ -28,10 +30,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -52,23 +52,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -90,13 +93,13 @@
                                     <dd>베니건스 전지점</dd>
                                 </dl>
                             </div>
-                            <button type="button" class="btn-get-coupon">쿠폰받기</button>
+                            <button type="button" class="btn-coupon">쿠폰받기</button>
                             <h3>이용안내</h3>
                             <ul>
                                 <li>● 이용안내 : 2만원 이상 결제시 사용가능, 타 쿠폰과 함께 사용불가, 테이블 당 1매</li>
                                 <li>● 2만원 이상 결제 시 사용가능합니다.</li>
                                 <li><img src="resources/img/coupon.png" alt=""></li>
-                                <li><a href="#">제품정보 보러가기</a> &gt;</li>
+                                <li><a class="link-coupon" href="#">제품정보 보러가기</a> &gt;</li>
                             </ul>
                         </article>
                         <!-- /쿠폰 -->
@@ -159,10 +162,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -175,22 +176,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -233,10 +238,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -246,22 +249,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -292,10 +299,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -316,22 +321,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -385,13 +394,13 @@
                                     <dd>베니건스 전지점</dd>
                                 </dl>
                             </div>
-                            <button type="button" class="btn-get-coupon">쿠폰받기</button>
+                            <button type="button" class="btn-coupon">쿠폰받기</button>
                             <h3>이용안내</h3>
                             <ul>
                                 <li>● 이용안내 : 2만원 이상 결제시 사용가능, 타 쿠폰과 함께 사용불가, 테이블 당 1매</li>
                                 <li>● 2만원 이상 결제 시 사용가능합니다.</li>
                                 <li><img src="resources/img/coupon.png" alt=""></li>
-                                <li><a href="#">제품정보 보러가기</a> &gt;</li>
+                                <li><a class="link-coupon" href="#">제품정보 보러가기</a> &gt;</li>
                             </ul>
                         </article>
                         <!-- /쿠폰 -->
@@ -420,10 +429,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -442,22 +449,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -516,10 +527,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -537,22 +546,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -608,10 +621,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -628,22 +639,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -694,10 +709,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -710,22 +723,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
@@ -759,13 +776,13 @@
                                     <dd>베니건스 전지점</dd>
                                 </dl>
                             </div>
-                            <button type="button" class="btn-get-coupon">쿠폰받기</button>
+                            <button type="button" class="btn-coupon">쿠폰받기</button>
                             <h3>이용안내</h3>
                             <ul>
                                 <li>● 이용안내 : 2만원 이상 결제시 사용가능, 타 쿠폰과 함께 사용불가, 테이블 당 1매</li>
                                 <li>● 2만원 이상 결제 시 사용가능합니다.</li>
                                 <li><img src="resources/img/coupon.png" alt=""></li>
-                                <li><a href="#">제품정보 보러가기</a> &gt;</li>
+                                <li><a class="link-coupon" href="#">제품정보 보러가기</a> &gt;</li>
                             </ul>
                         </article>
                         <!-- /쿠폰 -->
@@ -793,10 +810,8 @@
                 <h2>
                     스무디킹 판교점
                 </h2>
-                <p class="point-info">전단지를 모두 넘겨 보시면 <strong>500P</strong>를 드려요!</p>
-                <div class="point-missed">
-                    <p>앗! 전단을 끝까지 넘기지 않으셔서<br><strong>50P</strong>를 놓치셨습니다</p>
-                </div>
+                <p class="point-info-before">전단지를 모두 넘겨 보시면 <strong>50P</strong>를 드려요!</p>
+                <p class="point-info-after">모든 전단지 확인하여 <strong>50P</strong>적립완료</p>
                 <nav class="pagination">
                     <button type="button" class="prev">이전 전단지 보기</button>
                     <button type="button" class="next">다음 전단지 보기</button>
@@ -816,22 +831,26 @@
                 </nav>
             </header>
             <div class="item-body">
-                <div class="point-icon-before">
-                    <strong>50P</strong><br>적립
+                <div class="point-icon-before"><strong>50P</strong><br>적립</div>
+                <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
+                <div class="check">
+                    <div class="check-bg">
+                    </div>
+                    <div class="check-visit">
+                        <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
+                        <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
+                        <span class="check-title">방문확인</span>
+                        <span class="check-visit-before"><strong>50P</strong>적립</span>
+                        <span class="check-visit-after">적립완료</span>
+                    </div>
+                    <div class="check-barcode">
+                        <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
+                        <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
+                        <span class="check-title">바코드확인</span>
+                        <span class="check-barcode-before"><strong>50P</strong>적립</span>
+                        <span class="check-barcode-after">적립완료</span>
+                    </div>
                 </div>
-                <div class="point-icon-after">
-                    <strong>적립완료</strong>
-                </div>
-                <dl class="check-visit">
-                    <img src="resources/img/icon_visit.png" alt="방문확인">
-                    <dt>방문확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
-                <dl class="check-barcode">
-                    <img src="resources/img/icon_barcode.png" alt="바코드확인">
-                    <dt>바코드확인</dt>
-                    <dd>적립완료</dd>
-                </dl>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">

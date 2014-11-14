@@ -15,7 +15,7 @@
 
 		enableAnim: false,
 
-		scrollThreshold: 0.1, //not used for sub page scroll yet
+		scrollThreshold: 0.1,
 
 		swipeThreshold: 0.1
 	};
@@ -32,9 +32,15 @@
 
 		itemTx: 0,
 
+		minY: 0,
+
+		maxY: 0,
+
 		itemWidth: 330,
 
 		bodyWidth: 330,
+
+		listHeight: 0,
 
 		minScroll: 10,
 
@@ -67,21 +73,32 @@
 
 		vx: 0,
 
-		moves: []
+		moves: [],
+
+		scrolls: []
 	};
 
 	//dom elements
 	var $document = $( document ),
-		$body,
+		$this,
 		$leaf,
-		$item,
-		$pagination,
-		$thumbnail,
+		$items,
 		$itemHeader,
 		$itemBody,
-		$list,
-		$listitems,
-		$listitem;
+		$itemBodyList,
+		$itemBodyListitem,
+		$itemFooter,
+		$flipArea,
+		$selectedPagination,
+		$selectedThumbnail,
+		$selectedItem,
+		$selectedBody,
+		$selectedList,
+		$selectedListitem,
+		$selectedListitems,
+		$selectedItemFooter,
+		$selectedItemsPrev,
+		$selectedItemsNext;
 
 	$document.ready( function() {
 
@@ -116,23 +133,23 @@
 
 			if( version[ 0 ] >= 6 ) {
 				leaf.enableAnim = true;
+				leaf.iOS = true;
 			}
 		}
 	};
 
 	leaf.initVars = function() {
 		$body = $( "body" );
-		$leaf = $( ".leaf" );
-		$item = $( ".item" );
-		$pagination = $item.find( ".pagination" );
-		$thumbnail = $pagination.find( ".thumb" );
+		$leaf = $( ".leaf" ).height( window.innerHeight );
+		$items = $( ".item" );
 		$itemHeader = $( ".item-header" );
-		$itemBody = $item.find( ".item-body" );
-		$list = $item.find( ".item-body-list" );
-		$listitems = $list.find( ".item-body-listitem" );
-		$listitem = $( $listitems[ 0 ] );
+		$itemBody = $( ".item-body" );
+		$itemBodyList = $( ".item-body-list" );
+		$flipArea = $( ".flip-area" );
+		$itemFooter = $( ".item-footer" );
+		$itemBodyListitem = $( ".item-body-listitem" );
 
-		sub.itemWidth = $listitem.width();
+		sub.itemWidth = $itemBodyListitem.width();
 	};
 
 	leaf.bindEvents = function() {
@@ -174,38 +191,66 @@
 	};
 
 	leaf.setElements = function() {
+		$this = $( ".item>.wrap" );
 
-		$body.addClass( "expanded" );
+		setSelected();
 
-		$( $thumbnail.get( 0 ) ).addClass( "active" );
-
-		if ( $listitems.length >= 6 ) { //highlight next arrow button
-			$pagination.addClass( "highlight" );
+		$( $selectedThumbnail.get( 0 ) ).addClass( "active" );
+		if ( $selectedListitems.length >= 6 ) { //highlight next arrow button
+			$selectedPagination.addClass( "highlight" );
 		}
 
-		$item.addClass( "selected expand" );//start expand transition
+		$selectedItem.addClass( "selected expand" );//start expand transition
 
-		sub.bodyWidth = ( $listitems.length - 1 ) * sub.itemWidth;
+		$body.addClass( "expanded" ); //prepare body for expand transition(overflow-y:hidden)
+		sub.bodyWidth = ( $selectedListitems.length - 1 ) * sub.itemWidth;
 
 		if( leaf.enableAnim ) {
 			sub.itemTx = 0;
 
-			$listitems.addClass( "display" ).each( function() {
+			$selectedListitems.addClass( "display" ).each( function() {
 				$( this ).data( "tx", sub.itemTx );
 				$( this ).css( "-webkit-transform",  "translate3d( " + sub.itemTx + "px, 0, 0 )" );
 				sub.itemTx += sub.itemWidth;
 			});
 		}
 
-		setTimeout( leaf.checkCompleted(), 100 );
+		$selectedListitems.data( "ty", 0 ); //reset ty
+
+		if( sub.listHeight === 0 ) {
+			sub.listHeight = ( sub.listHeight !== 0 ) ? sub.listHeight :
+				( window.innerHeight - $selectedBody.children( ".item-body-button" ).outerHeight() -
+					$selectedItem.find( ".wrap .item-header" ).outerHeight() -
+					2 * parseInt( $selectedBody.css( "border-top-width" ), 10 ) );
+
+			$( ".item-body-list" ).height( sub.listHeight );
+		}
+
+		sub.maxY = $selectedBody.children( ".check" ).height();
+		sub.minY = Math.min( 0, $selectedList.innerHeight() - $selectedListitem.innerHeight() );
+
+		leaf.checkComplete();
+
+		function setSelected() {
+			$selectedItem = $this.parent( ".item" );
+			$selectedPagination = $this.find( ".pagination" );
+			$selectedThumbnail = $selectedPagination.find( ".thumb" );
+			$selectedBody = $this.find( ".item-body" );
+			$selectedList = $this.find( ".item-body-list" );
+			$selectedListitems = $selectedList.find( ".item-body-listitem" );
+			$selectedListitem = $( $selectedListitems[ 0 ] );
+			$selectedItemFooter = $this.find( ".item-footer" );
+		}
 	};
 
 	$document.on( start, function( e ) {
 
-		touch.pos = hasTouch? e.originalEvent.touches[ 0 ] : e;
-		touch.sx = touch.pos.clientX;
-		touch.sy = touch.pos.clientY;
-		touch.moves = [];
+		if( !leaf.animating ) {
+			touch.pos = hasTouch? e.originalEvent.touches[ 0 ] : e;
+			touch.sx = touch.pos.clientX;
+			touch.sy = touch.pos.clientY;
+			touch.moves = [];
+		}
 	});
 
 	$document.on( move, function( e ) {
@@ -241,21 +286,19 @@
 					touch.tx = Math.max( -sub.bodyWidth, Math.min( touch.ox + touch.mx - sub.sliding, 0 ) );
 
 					if( leaf.enableAnim ) {
-						$list.css( "-webkit-transform", "translate3d( " + touch.tx + "px, 0, 0 )" );
+						$selectedList.css( "-webkit-transform", "translate3d( " + touch.tx + "px, 0, 0 )" );
 					}
 				}
 			}
 		}
 
 		function subScroll() {
-			var maxY = 0,
-				minY = $itemBody.innerHeight() - $listitem.innerHeight();
+			touch.ty = Math.max( sub.minY, Math.min( sub.maxY, touch.oy + touch.my - touch.sy ) );
 
-			touch.ty = Math.max( minY, Math.min( 0, touch.oy + touch.my - touch.sy ) );
 			if( leaf.enableAnim ) {
-				$listitem.css( "-webkit-transform", "translate3d( " + $listitem.data( "tx" ) + "px, " + touch.ty + "px, 0 )" );
+				$selectedListitem.css( "-webkit-transform", "translate3d( " + $selectedListitem.data( "tx" ) + "px, " + touch.ty + "px, 0 )" );
 			} else {
-				$listitem.css( "-webkit-transform", "translateY( " + touch.ty + "px )" );
+				$selectedListitem.css( "-webkit-transform", "translateY( " + touch.ty + "px )" );
 			}
 		}
 	});
@@ -263,6 +306,7 @@
 	$document.on( end, function( e ) {
 
 		if( $( e.target ).parents( ".item-body-list" ).length === 0 ) {
+			// e.preventDefault();
 			return;
 		}
 
@@ -301,51 +345,71 @@
 
 			touch.tx = touch.ox;
 			sub.itemIndex = -touch.ox / sub.itemWidth;
-			$listitem = $( $listitems[ sub.itemIndex ] );
+			$selectedListitem.data( "ty", touch.oy );
+			$selectedListitem = $( $selectedListitems[ sub.itemIndex ] );
+			touch.oy = $selectedListitem.data( "ty" );
+			sub.minY = Math.min( 0, $selectedList.innerHeight() - $selectedListitem.innerHeight() );
 
 			if( leaf.enableAnim ) {
 				clearTimeout( sub.transTimer );
 
 				sub.transitioning = true;
-				$list.css( "-webkit-transition", "-webkit-transform " + sub.transDuration / 1000 + "s" );
+				$selectedList.css( "-webkit-transition", "-webkit-transform " + sub.transDuration / 1000 + "s" );
 
 				sub.transTimer = setTimeout( function() {
 					sub.transitioning = false;
-					$list.css( "-webkit-transition", "" );
+					$selectedList.css( "-webkit-transition", "" );
 				}, sub.transDuration );
 
-				$list.css({
+				$selectedList.css({
 					"-webkit-transform": "translate3d(" + touch.ox + "px, 0, 0 )"
 				});
 			} else {
-				$listitems.css( "display", "none" );
-				$listitem.css( "display", "block" );
+				$selectedListitems.css( "display", "none" );
+				$selectedListitem.css( "display", "block" );
 			}
 
 			checkActivated();
 			checkShifted();
-			leaf.checkCompleted();
+			leaf.checkComplete();
 		}
 
 		function checkActivated() {
-			$thumbnail.removeClass( "active" );
-			$( $thumbnail.get( sub.itemIndex ) ).addClass( "active" );
+			$selectedThumbnail.removeClass( "active" );
+			$( $selectedThumbnail.get( sub.itemIndex ) ).addClass( "active" );
 		}
 
 		function checkShifted() {
-			if( sub.itemIndex === 5 && !$pagination.hasClass( "shift" ) ) {
-				$pagination.addClass( "shift" );
-			} else if( sub.itemIndex === 4 && $pagination.hasClass( "shift" ) ) {
-				$pagination.removeClass( "shift" );
+			if( sub.itemIndex === 5 && !$selectedPagination.hasClass( "shift" ) ) {
+				$selectedPagination.addClass( "shift" );
+			} else if( sub.itemIndex === 4 && $selectedPagination.hasClass( "shift" ) ) {
+				$selectedPagination.removeClass( "shift" );
 			}
 		}
 	};
 
-	leaf.checkCompleted = function() {
-		if( sub.itemIndex === $listitems.length - 1 ) {
-			$document.trigger( "viewComplete" );
+	leaf.checkComplete = function() {
+		if( sub.itemIndex === $selectedListitems.length - 1 ) {
+			$document.trigger( "viewcomplete" );
 		}
 	};
+
+	leaf.checkIncomplete = function() {
+		if( !$selectedItem.hasClass( "complete" ) && sub.itemIndex !== $selectedListitems.length - 1 ) {
+			$document.trigger( "viewincomplete" );
+		}
+	};
+
+	function getScrollVelocity() {
+			var arr = touch.scrolls;
+
+			if( touch.scrolls.length > 1 ) { //not enough scrolls
+				arr = touch.scrolls.slice( -2 );
+
+				return ( arr[ 1 ].scroll - arr[ 0 ].scroll ) / ( arr[ 0 ].time - arr[ 1 ].time );
+			}
+			return 0;
+	}
 
 	function getHorizontalVelocity() {
 		var arr;

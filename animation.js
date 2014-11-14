@@ -55,9 +55,15 @@
 
 		itemTx: 0,
 
+		minY: 0,
+
+		maxY: 0,
+
 		itemWidth: 330,
 
 		bodyWidth: 330,
+
+		listHeight: 0,
 
 		minScroll: 10,
 
@@ -137,7 +143,6 @@
 		$selectedItemsPrev,
 		$selectedItemsNext;
 
-
 	$document.ready( function() {
 
 		leaf.checkDevice();
@@ -187,7 +192,7 @@
 
 	leaf.initVars = function() {
 		$body = $( "body" );
-		$leaf = $( ".leaf" ).height( $( window ).height() );
+		$leaf = $( ".leaf" ).height( window.innerHeight );
 		$leafHeader = $( ".leaf-header" );
 		$leafFooter = $( ".leaf-footer" );
 		$items = $( ".item" );
@@ -264,6 +269,17 @@
 		}
 	};
 
+	leaf.setElements = function() {
+		if( sub.listHeight === 0 ) {
+			sub.listHeight = ( sub.listHeight !== 0 ) ? sub.listHeight :
+				( window.innerHeight - $selectedBody.children( ".item-body-button" ).outerHeight() -
+					$selectedItem.find( ".wrap .item-header" ).outerHeight() -
+					2 * parseInt( $selectedBody.css( "border-top-width" ), 10 ) );
+
+			$( ".item-body-list" ).height( sub.listHeight );
+		}
+	};
+
 	leaf.setFlipAnimation = function() {
 		if( leaf.enableAnim ) {
 			if( !leaf.iOS ) {
@@ -315,6 +331,7 @@
 	};
 
 	leaf.expandItem = function() {
+
 		beforeExpansion();
 
 		if( leaf.enableAnim ) {
@@ -330,6 +347,9 @@
 
 		//local functions for expansion
 		function beforeExpansion() {
+
+			$document.trigger( "beforeexpand" );
+
 			main.expanded = true;
 
 			if( !leaf.iOS ) {
@@ -377,8 +397,9 @@
 				$selectedItem.addClass( "selected expand" );//start expand transition
 			}
 
-			setTimeout( afterExpansion, main.transDuration );
+			leaf.setElements();
 
+			setTimeout( afterExpansion, main.transDuration );
 
 			function setSelected() {
 				$selectedPagination = $this.find( ".pagination" );
@@ -421,6 +442,8 @@
 		function afterExpansion() {
 			$body.addClass( "expanded" ); //prepare body for expand transition(overflow-y:hidden)
 			sub.bodyWidth = ( $selectedListitems.length - 1 ) * sub.itemWidth;
+			sub.maxY = $selectedBody.children( ".check" ).height();
+			sub.minY = Math.min( 0, $selectedList.innerHeight() - $selectedListitem.outerHeight() );
 
 			if( leaf.enableAnim ) {
 				sub.itemTx = 0;
@@ -437,19 +460,26 @@
 				$selectedItemsPrev.css( "visibility", "hidden" ); //To be fixed
 				$selectedItemsNext.css( "display", "none" );
 			}
+			$selectedListitems.data( "ty", 0 ); //reset ty
 
-			leaf.checkCompleted();
+			leaf.checkComplete();
 			leaf.animating = false;
+
+			$document.trigger( "afterexpand" );
 		}
 	};
 
 	leaf.shrinkItem = function() {
+
 		beforeShrink();
 
 		setTimeout( afterShrink, main.transDuration * 1.3 );
 
 		//local functions
 		function beforeShrink() {
+
+			$document.trigger( "beforeshrink" );
+
 			touch.ox = 0; //reset list-item position
 			sub.itemIndex = 0;
 
@@ -463,13 +493,13 @@
 				$selectedItemFooter.css({
 					"-webkit-transform": "translateY(50%)"
 				});
-				$selectedListitems.removeClass( "display" ); //hide list-item
+				$selectedListitems.removeClass( "display" ).css( "-webkit-transform",  "" );
 
 				$selectedItemsPrev.css( "opacity", "" );
 				$selectedItemsNext.css( "opacity", "" );
 			} else {
 				$selectedItemFooter.css( "display", "block" );
-				$selectedListitems.css( "display", "" );
+				$selectedListitems.css( "display", "" ).css( "-webkit-transform", "" );
 
 				$selectedItemsPrev.css( "visibility", "visible" );
 				$selectedItemsNext.css( "display", "block" );
@@ -510,6 +540,7 @@
 			$selectedItem.removeClass( "expand" );
 			$items.not( ".selected" ).css( "display", "block" );
 
+			leaf.checkIncomplete();
 			resetSelected();
 
 			main.expanded = false;
@@ -528,6 +559,8 @@
 				$selectedItemsPrev = null;
 				$selectedItemsNext = null;
 			}
+
+			$document.trigger( "aftershrink" );
 		}
 	};
 
@@ -594,10 +627,8 @@
 		}
 
 		function subScroll() {
-			var maxY = 0,
-				minY = $selectedBody.innerHeight() - $selectedListitem.innerHeight();
+			touch.ty = Math.max( sub.minY, Math.min( sub.maxY, touch.oy + touch.my - touch.sy ) );
 
-			touch.ty = Math.max( minY, Math.min( 0, touch.oy + touch.my - touch.sy ) );
 			if( leaf.enableAnim ) {
 				$selectedListitem.css( "-webkit-transform", "translate3d( " + $selectedListitem.data( "tx" ) + "px, " + touch.ty + "px, 0 )" );
 			} else {
@@ -648,7 +679,10 @@
 
 			touch.tx = touch.ox;
 			sub.itemIndex = -touch.ox / sub.itemWidth;
+			$selectedListitem.data( "ty", touch.oy );
 			$selectedListitem = $( $selectedListitems[ sub.itemIndex ] );
+			touch.oy = $selectedListitem.data( "ty" );
+			sub.minY = Math.min( 0, $selectedList.innerHeight() - $selectedListitem.innerHeight() );
 
 			if( leaf.enableAnim ) {
 				clearTimeout( sub.transTimer );
@@ -671,7 +705,7 @@
 
 			checkActivated();
 			checkShifted();
-			leaf.checkCompleted();
+			leaf.checkComplete();
 		}
 
 		function checkActivated() {
@@ -688,9 +722,15 @@
 		}
 	};
 
-	leaf.checkCompleted = function() {
+	leaf.checkComplete = function() {
 		if( sub.itemIndex === $selectedListitems.length - 1 ) {
-			$document.trigger( "viewComplete" );
+			$document.trigger( "viewcomplete" );
+		}
+	};
+
+	leaf.checkIncomplete = function() {
+		if( !$selectedItem.hasClass( "complete" ) && sub.itemIndex !== $selectedListitems.length - 1 ) {
+			$document.trigger( "viewincomplete" );
 		}
 	};
 
