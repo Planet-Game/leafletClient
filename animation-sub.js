@@ -32,13 +32,13 @@
 
 		itemTx: 0,
 
-		minY: 0,
-
-		maxY: 0,
-
 		itemWidth: 330,
 
 		bodyWidth: 330,
+
+		minY: 0,
+
+		maxY: 0,
 
 		listHeight: 0,
 
@@ -106,13 +106,16 @@
 		leaf.initVars();
 		leaf.bindEvents();
 		leaf.loadImages();
-		leaf.setElements();
 
 		if( leaf.enableAnim ) {
 			$leaf.addClass( "enable-anim" );
 		} else {
 			sub.transDuration = 0;
 		}
+
+		setTimeout(function() {
+		}, 10)
+
 	});
 
 	leaf.checkDevice = function() { //support 3d animation for Android 4.2 and iOS 6 or above
@@ -154,6 +157,10 @@
 
 	leaf.bindEvents = function() {
 
+		$document.on( "firstimageloaded", function() {
+			leaf.setElements();
+		});
+
 		$( ".prev-img" ).on( "click", function( e ){
 			e.preventDefault();
 			e.stopPropagation();
@@ -172,15 +179,19 @@
 	};
 
 	leaf.loadImages = function() {
+		$( ".item-body-listitem img:first" ).load( function() {
+			$document.trigger( "firstimageloaded" );
+		});
 
 		changeDataSrc( ".item-body-listitem img:first" ); //first image
 		changeDataSrc( ".pagination ol img" ); //thumbnail images
 		changeDataSrc( ".item-body-listitem img" ); //remaining images
 
+
 		function changeDataSrc( selector ) {
 			var $image;
 
-			$( selector ).each(function() {
+			$( selector ).each( function() {
 				$image = $( this );
 
 				if( $image.attr( "src") !== $image.attr( "data-src") ) { //prevent duplicate change
@@ -228,6 +239,8 @@
 
 		sub.maxY = $selectedBody.children( ".check" ).height();
 		sub.minY = Math.min( 0, $selectedList.innerHeight() - $selectedListitem.innerHeight() );
+
+		console.log( "setElem " + sub.minY + ", list.height: " + $selectedList.innerHeight() + ", listitem.height: " + $selectedListitem.innerHeight() );
 
 		leaf.checkComplete();
 
@@ -349,6 +362,8 @@
 			$selectedListitem = $( $selectedListitems[ sub.itemIndex ] );
 			touch.oy = $selectedListitem.data( "ty" );
 			sub.minY = Math.min( 0, $selectedList.innerHeight() - $selectedListitem.innerHeight() );
+
+			console.log( "transLeaf " + sub.minY + ", list.height: " + $selectedList.innerHeight() + ", listitem.height: " + $selectedListitem.innerHeight() );
 
 			if( leaf.enableAnim ) {
 				clearTimeout( sub.transTimer );
