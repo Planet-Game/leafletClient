@@ -15,7 +15,6 @@
 <body>
 <div class="leaf">
     <section class="item" id="section-1">
-    <!-- point-before || point-after -->
         <div class="wrap">
             <header class="item-header">
                 <h2>
@@ -46,35 +45,34 @@
                 <div class="point-icon-before"><strong>50P</strong><br>적립</div>
                 <div class="point-icon-after"><img src="resources/img/icon_complete.png" alt="방문완료"><strong>적립완료</strong></div>
                 <div class="check">
-                    <div class="check-bg">
-                    </div>
-                    <div class="check-visit">
+                    <button type="button" class="check-visit">
                         <img class="check-visit-before" src="resources/img/icon_visit.png" alt="방문확인">
                         <img class="check-visit-after" src="resources/img/icon_complete.png" alt="방문완료">
                         <span class="check-title">방문확인</span>
                         <span class="check-visit-before"><strong>50P</strong>적립</span>
                         <span class="check-visit-after">적립완료</span>
-                    </div>
-                    <div class="check-barcode">
+                    </button>
+                    <button type="button" class="check-barcode">
                         <img class="check-barcode-before" src="resources/img/icon_barcode.png" alt="바코드확인">
                         <img class="check-barcode-after" src="resources/img/icon_complete.png" alt="바코드완료">
                         <span class="check-title">바코드확인</span>
                         <span class="check-barcode-before"><strong>50P</strong>적립</span>
                         <span class="check-barcode-after">적립완료</span>
-                    </div>
+                    </button>
                 </div>
                 <button type="button" class="prev-img">이전 이미지 보기</button>
                 <button type="button" class="next-img">다음 이미지 보기</button>
                 <ul class="item-body-list">
                     <li class="item-body-listitem">
                         <img data-src="resources/img/item.smoothieking.png">
+                        <a class="link-img" href="#">바로 가기</a>
                         <p class="item-info">15년 경력의 임상경험의 대표원장 직접시술<br>각 전공과별 협진 시스템 및 각종 안전을 위한 의료장비.</p>
                     </li>
                     <li class="item-body-listitem">
                         <!-- 쿠폰 -->
                         <article class="item-coupon">
                             <div class="coupon-desc">
-                                <div class="thumb"><img class="coupon-img" src="resources/img/coupon.jpg" width="100%" alt=""></div>
+                                <div class="thumb"><img class="coupon-img" data-src="resources/img/coupon.jpg" width="100%" alt=""></div>
                                 <h2>음료 에이드와 포테이토 3,000원 할인권</h2>
                                 <p class="price">무료</p>
                                 <dl>
@@ -89,7 +87,7 @@
                             <ul>
                                 <li>● 이용안내 : 2만원 이상 결제시 사용가능, 타 쿠폰과 함께 사용불가, 테이블 당 1매</li>
                                 <li>● 2만원 이상 결제 시 사용가능합니다.</li>
-                                <li><img src="resources/img/coupon.png" alt=""></li>
+                                <li><img data-src="resources/img/coupon.png" alt=""></li>
                                 <li><a class="link-coupon" href="#">제품정보 보러가기</a> &gt;</li>
                             </ul>
                         </article>
@@ -136,6 +134,12 @@
                     <input type="button" class="btn-scrap" value="스크랩하기">
                 </div>
             </div>
+            <footer class="item-footer">
+                <p class="point-msg-before">전단지를 확인하고 <strong>50P 적립</strong>하세요.</p>
+                <p class="point-msg-after">전단지를 확인하셔서 50P 적립되었습니다.</p>
+                <div class="flip-area"></div>
+                <div class="flip-bg"></div>
+            </footer>
         </div>
     </section>
 </div>
