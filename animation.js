@@ -21,11 +21,15 @@
 
 		hashId: "leaflet",
 
+		reloaded: "",
+
 		iOS: false,
 
 		scrollThreshold: 0.1,
 
-		swipeThreshold: 0.1
+		swipeThreshold: 0.1,
+
+		imageButtonsTimer: null
 	};
 
 	var main = {
@@ -138,9 +142,11 @@
 		$itemBodyListitem,
 		$itemBodyButton,
 		$itemFooter,
+		$firstImages,
 		$flipArea,
+		$flipBg,
 		$selectedPagination,
-		$selectedThumbnail,
+		$selectedThumbnails,
 		$selectedItem,
 		$selectedBody,
 		$selectedImageButtons,
@@ -156,7 +162,8 @@
 		leaf.checkDevice();
 		leaf.initVars();
 		leaf.bindEvents();
-		leaf.loadImages( $( ".item-body-listitem:first-child img" ) ); //download first images
+		leaf.loadImages( $firstImages ); //download first images
+		leaf.checkReloaded();
 
 		if( leaf.iOS ) {
 			$body.addClass( "ios" );
@@ -168,11 +175,48 @@
 
 		if( leaf.enableAnim ) {
 			$leaf.addClass( "enable-anim" );
-			leaf.loadImages( $( ".leaf-footer img" ) ); //download flip bg
+			leaf.loadImages( $flipBg ); //download flip bg
 			leaf.setFlipAnimation();
 		} else {
 			main.transDuration = 0;
 			sub.transDuration = 0;
+		}
+
+		if( leaf.reloaded !== "" ) {
+			$body.css( "opacity", "0" ); //hide body
+
+			$selectedItem = $( "#" + leaf.reloaded );
+
+			if( leaf.enableAnim ) {
+				main.scrollDuration= 0;
+				main.transDuration = 0;
+				main.transDelay = 0;
+			}
+
+			leaf.hashed = true;
+			leaf.animating = true;
+			leaf.expandItem();
+
+			setTimeout( function() { //due to hash history bug on chrome, need to update using timer
+				location.hash = leaf.hashId;
+			}, 100 );
+
+
+			if( leaf.enableAnim ) {
+				setTimeout( function() {
+					main.scrollDuration = 200;
+					main.transDuration = 750;
+					main.transDelay = 250;
+
+					$selectedItemFooter.css({
+					    "-webkit-transition": "-webkit-transform " + ( main.transDuration / 1000 ) + "s"
+					});
+
+					$body.css( "opacity", "" ); //show body
+				}, 300 );
+			} else {
+				$body.css( "opacity", "" ); //show body
+			}
 		}
 	});
 
@@ -210,7 +254,9 @@
 		$itemBodyList = $( ".item-body-list" );
 		$itemBodyListitem = $( ".item-body-listitem" );
 		$itemBodyButton = $( ".item-body-button" );
+		$firstImages = $( ".item-body-listitem:first-child img" );
 		$flipArea = $( ".flip-area" );
+		$flipBg = $( ".leaf-footer img" );
 		$itemFooter = $( ".item-footer" );
 
 		sub.itemWidth = $itemBodyListitem.width();
@@ -222,11 +268,10 @@
 		$( ".item>.wrap" ).on( "click", function( e ){
 			e.preventDefault();
 
-			if( !leaf.animating ) {
-				leaf.animating = true;
+			$selectedItem = $( this ).parent( ".item" );
 
-				$this = $( this );
-				$selectedItem = $this.parent( ".item" );
+			if( !leaf.animating && $selectedItem.data( "itemIndex" ) !== undefined ) { //preformed only after downloading image
+				leaf.animating = true;
 
 				if( !main.expanded ) {
 					leaf.expandItem();
@@ -252,10 +297,21 @@
 			leaf.transLeaf();
 		});
 
-		$( ".leaf-footer img" ).load(function() { //to hide grey area while loading flip bg image
+		$flipBg.load( function() { //to hide grey area while loading flip bg image
 			if( leaf.enableAnim ) {
 				$itemFooter.addClass( "loaded" );
 			}
+		});
+
+		$firstImages.load( function() { //show listitem after loading first image
+			$( this ).parent().css( "display", "block" ).parents( ".item" ).data( "itemIndex", 0 );
+		});
+
+		$document.on( "beforerefresh", function() {
+			$body.css( "opacity", "0" ); //hide body
+
+			location.hash = $selectedItem.attr( "id" ) + "?itemIndex=" + sub.itemIndex;
+			leaf.enableAnim = false;
 		});
 	};
 
@@ -265,8 +321,21 @@
 		$elems.each( function() {
 			$image = $( this );
 
-			if( $image.attr( "data-src" ) && $image.attr( "data-src") !== $image.attr( "src" ) ) { //prevent duplicate change
+			if( $image.attr( "data-src" ) && $image.attr( "data-src" ) !== $image.attr( "src" ) ) { //prevent duplicate change
 				$image.attr( "src", $image.attr( "data-src" ) );
+			}
+		});
+	};
+
+	leaf.checkReloaded = function() {
+		var hash = location.hash.split( "?itemIndex=" ); //hash[ 0 ] is item's #id, hash[ 1 ] is sub.itemIndex
+		hash[ 0 ] = hash[ 0 ].slice( 1 ); //remove #
+
+		$( ".item" ).each( function() {
+
+			if( $( this ).attr( "id" ) === hash[ 0 ] ) {
+				leaf.reloaded = hash[ 0 ];
+				$( this ).data( "itemIndex", hash[ 1 ] );
 			}
 		});
 	};
@@ -357,7 +426,9 @@
 			$scroll.animate({
 					scrollTop: leaf.scrollTop
 				}, main.scrollDuration,
-				onExpansion
+				function() {
+					setTimeout( onExpansion, 100 );
+				}
 			);
 		} else {
 			$scroll.scrollTop( 0 );
@@ -367,8 +438,10 @@
 		//local functions for expansion
 		function beforeExpansion() {
 
-			sub.id = $selectedItem.attr( "id" );
 			main.expanded = true;
+			sub.id = $selectedItem.attr( "id" );
+			sub.itemIndex = $selectedItem.data( "itemIndex" );
+			touch.ox = - sub.itemWidth * sub.itemIndex;
 
 			$document.trigger( jQuery.Event( "beforeexpand", { id: sub.id } ) );
 
@@ -385,7 +458,6 @@
 			if( !leaf.hashed ) {
 				location.hash = leaf.hashId;
 				leaf.hashed = true;
-				// $scroll.scrollTop( leaf.scrollTop );
 			}
 
 			$leafFooter.addClass( "expand" );
@@ -398,10 +470,7 @@
 		function onExpansion() {
 			setSelected();
 
-			$( $selectedThumbnail.get( 0 ) ).addClass( "active" );
-			if ( $selectedListitems.length >= 6 ) { //highlight next arrow button
-				$selectedPagination.addClass( "highlight" );
-			}
+			leaf.setThumbnails();
 
 			if( leaf.enableAnim ) {
 				locate3d();
@@ -426,20 +495,22 @@
 			setTimeout( afterExpansion, main.transDuration + main.transDelay );
 
 			function setSelected() {
-				$selectedPagination = $this.find( ".pagination" );
-				$selectedThumbnail = $selectedPagination.find( ".thumb" );
-				$selectedBody = $this.find( ".item-body" );
+				$selectedPagination = $selectedItem.find( ".pagination" );
+				$selectedPaginationNext = $selectedPagination.children( ".next" );
+				$selectedPaginationPrev = $selectedPagination.children( ".prev" );
+				$selectedThumbnails = $selectedPagination.find( ".thumb" );
+				$selectedBody = $selectedItem.find( ".item-body" );
 				$selectedImageButtons = $selectedBody.children( "button" );
-				$selectedList = $this.find( ".item-body-list" );
+				$selectedList = $selectedItem.find( ".item-body-list" );
 				$selectedListitems = $selectedList.find( ".item-body-listitem" );
-				$selectedListitem = $( $selectedListitems[ 0 ] );
-				$selectedItemFooter = $this.find( ".item-footer" );
+				$selectedListitem = $( $selectedListitems[ sub.itemIndex ] );
+				$selectedItemFooter = $selectedItem.find( ".item-footer" );
 				$selectedItemsPrev = $selectedItem.prevAll( ".item" );
 				$selectedItemsNext = $selectedItem.nextAll( ".item" );
 			}
 
 			function locate3d() {
-				$selectedItemsNext.each(function() {
+				$selectedItemsNext.each( function() {
 					var $item = $( this );
 
 					if( !leaf.iOS) {
@@ -453,7 +524,7 @@
 					});
 				});
 
-				$selectedItemsNext.addClass( "prepare3d" ).each(function() {
+				$selectedItemsNext.addClass( "prepare3d" ).each( function() {
 					var $item = $( this );
 
 					$item.css({
@@ -466,6 +537,7 @@
 
 		function afterExpansion() {
 			$body.addClass( "expanded" ); //prepare body for expand transition(overflow-y:hidden)
+
 			sub.bodyWidth = ( $selectedListitems.length - 1 ) * sub.itemWidth;
 			sub.maxY = $selectedBody.children( ".check" ).height();
 			sub.minY = Math.min( 0, sub.listHeight - $selectedListitem.outerHeight() );
@@ -473,17 +545,28 @@
 			if( leaf.enableAnim ) {
 				sub.itemTx = 0;
 
-				$selectedListitems.addClass( "display" ).each( function() {
+				$selectedList.css({
+					"-webkit-transform": "translate3d(" + touch.ox + "px, 0, 0 )"
+				});
+
+				$selectedListitems.each( function() {
 					$( this ).data( "tx", sub.itemTx );
-					$( this ).css( "-webkit-transform",  "translate3d( " + sub.itemTx + "px, 0, 0 )" );
+					$( this ).css({
+						"display": "block",
+						"-webkit-transform":  "translate3d( " + sub.itemTx + "px, 0, 0 )"
+					});
 					sub.itemTx += sub.itemWidth;
 				});
-				$selectedItemsPrev.css( "opacity", "0" );
-				$selectedItemsNext.css( "opacity", "0" );
+
+				$selectedItemsPrev.css( "visibility", "hidden" );
+				$selectedItemsNext.css( "display", "none" );
 
 				leaf.showImageButtons();
 
 			} else {
+				$selectedListitems.css( "display", "none" );
+				$selectedListitem.css( "display", "block" );
+
 				$selectedItemsPrev.css( "display", "none" ); //To be fixed
 				$selectedItemsNext.css( "display", "none" );
 			}
@@ -508,31 +591,37 @@
 			$document.trigger( jQuery.Event( "beforeshrink", { id: sub.id } ) );
 
 			touch.ox = 0; //reset list-item position
-			sub.itemIndex = 0;
 
 			$body.removeClass( "expanded" );
 			//shrink transition(reverse of expand)
 			if( leaf.enableAnim ) {
-				unlocate3d();
-
 				$selectedList.css( "-webkit-transform", "" );
-				$selectedListitems.css( "-webkit-transform", "" );
-				$selectedItemFooter.css( "-webkit-transform", "translateY( " + $selectedItemFooter.data( "ty" ) / 2 + "px )" );
-				$selectedListitems.removeClass( "display" ).css( "-webkit-transform",  "" );
+				$selectedItemsPrev.css( "visibility", "visible" );
+				$selectedItemsNext.css( "display", "" );
 
-				$selectedItemsPrev.css( "opacity", "" );
-				$selectedItemsNext.css( "opacity", "" );
+				setTimeout(function() {
+					unlocate3d();
+					$selectedItemFooter.css( "-webkit-transform", "translateY( " + $selectedItemFooter.data( "ty" ) / 2 + "px )" );
+				}, 0 );
+
 			} else {
 				$selectedItemFooter.css( "display", "" );
-				$selectedListitems.css( "display", "" ).css( "-webkit-transform", "" );
-
 				$selectedItemsPrev.css( "display", "" );
 				$selectedItemsNext.css( "display", "" );
 			}
 
+			$selectedListitems.css({
+				"display": "",
+				"-webkit-transform": ""
+			});
+			$selectedListitem.css( "display", "block" );
+
+			$selectedItem.data( "itemIndex", sub.itemIndex );
+
 			$selectedPagination.removeClass( "shift" ); //reset pagination
-			$selectedThumbnail.removeClass( "active" );
+			$selectedThumbnails.removeClass( "active" );
 			$selectedItem.removeClass( "selected" );
+
 
 			$scroll.scrollTop( leaf.scrollTop ); //recover scrollTop changed by empty hash
 			$leafFooter.removeClass( "expand" );
@@ -577,8 +666,11 @@
 
 			function resetSelected() {
 				$selectedPagination = null;
-				$selectedThumbnail = null;
+				$selectedPaginationNext = null;
+				$selectedPaginationPrev = null;
+				$selectedThumbnails = null;
 				$selectedBody = null;
+				$selectedImageButtons = null;
 				$selectedList = null;
 				$selectedListitems = null;
 				$selectedListitem = null;
@@ -590,6 +682,11 @@
 	};
 
 	$( window ).on( "hashchange", function() {
+
+		if( leaf.reloaded !== "" ) {
+			leaf.reloaded = "";
+			return;
+		}
 
 		if( !leaf.animating && main.expanded ) { //hashchange by back button
 			leaf.hashed = false;
@@ -735,25 +832,12 @@
 				$selectedListitem.css( "display", "block" );
 			}
 
-			checkActivated();
-			checkShifted();
+			leaf.setThumbnails();
 			leaf.checkComplete();
 
 			$document.trigger( jQuery.Event( "afterpagechange", { index: sub.itemIndex } ) );
 		}
 
-		function checkActivated() {
-			$selectedThumbnail.removeClass( "active" );
-			$( $selectedThumbnail.get( sub.itemIndex ) ).addClass( "active" );
-		}
-
-		function checkShifted() {
-			if( sub.itemIndex === 5 && !$selectedPagination.hasClass( "shift" ) ) {
-				$selectedPagination.addClass( "shift" );
-			} else if( sub.itemIndex === 4 && $selectedPagination.hasClass( "shift" ) ) {
-				$selectedPagination.removeClass( "shift" );
-			}
-		}
 	};
 
 	leaf.showImageButtons = function() {
@@ -770,6 +854,26 @@
 			});
 		}, 1000 );
 	};
+
+	leaf.setThumbnails = function() {
+
+		$selectedThumbnails.removeClass( "active" );
+		$( $selectedThumbnails.get( sub.itemIndex ) ).addClass( "active" );
+
+		if( sub.itemIndex === 4 && $selectedThumbnails.length >= 6 ) {
+			$selectedPaginationPrev.removeClass( "highlight" );
+			$selectedPaginationNext.addClass( "highlight" );
+		} else if( sub.itemIndex === 5 ) {
+			$selectedPaginationPrev.addClass( "highlight" );
+			$selectedPaginationNext.removeClass( "highlight" );
+		}
+
+		if( sub.itemIndex >= 5 && !$selectedPagination.hasClass( "shift" ) ) {
+			$selectedPagination.addClass( "shift" );
+		} else if( sub.itemIndex <= 4 && $selectedPagination.hasClass( "shift" ) ) {
+			$selectedPagination.removeClass( "shift" );
+		}
+	}
 
 	leaf.checkComplete = function() {
 		if( sub.itemIndex === $selectedListitems.length - 1 ) {

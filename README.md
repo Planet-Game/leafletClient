@@ -61,3 +61,9 @@
 - 애니메이션 미지원 단말 레이아웃 개선을 통한 성능 향상(화면에 표시되지 않는 객체 전체에 대해 visibility:hidden 대신 display:none 적용)
 - 터치 이벤트 오동작 방지코드 삽입(매장 전단 진입 시 touchend event에 preventDefault 상시 적용)
 - 상기 수정사항의 매장 전단 별도 페이지 반영
+
+[v 0.98 수정사항, 2014/11/25]
+- 매장 전단 리프레시 기능 추가(document에 beforerefresh 이벤트 전달 후 새창 띄우면 URL에 관련 정보 저장해두었다가 리프레시 시점에 기존 매장 전단 페이지를 보여주는 부분을 모두 클라이언트에서 처리하므로 서버에서는 방문 확인 등의 작업만 필요)
+- 상기 기능 관련 예제 추가(interface.js의 .link-coupon, .check-visit, .check-barcode 예제 확인 요망. button이 아닌 a-link의 경우 마크업에 해당 URL 삽입 필요)
+- 상권 전단 복귀 및 매장 전단 재진입 시 보던 페이지를 유지하는 기능 추가(scroll 성능 문제 없도록 transform 제거하고 display:block 속성 사용)
+- UX 관련 요청 사항 수정(적립 완료 애니메이션, 폰트 크기/위치/자간, 버튼 컬러 및 간격, 썸네일 좌우 화살표 색상 변경 시점 등)

@@ -37,8 +37,8 @@
 		$( ".link-coupon" ).on( "click", function( e ) {
 			if( $( this ).parents( ".expand" ).length !== 0 ) { //확대된 상태에서만 버튼 동작
 				e.stopPropagation(); //shrink 동작 방지
-				// e.preventDefault(); //a href="#" 일 경우 shrink 발생하므로 이를 방지하려면 사용할 것(외부 링크 사용 시 불필요)
-				alert( "제품정보" );
+				$document.trigger( "beforerefresh" ); //페이지 리프레시 준비 요청 이벤트
+				//e.preventDefault(); //a href="#" 일 경우 shrink 발생하므로 이를 방지하려면 사용할 것(외부 링크 사용 시 불필요)
 			}
 		});
 		//쿠폰 받기 버튼 연동 샘플
@@ -54,14 +54,17 @@
 		//방문확인 버튼 연동 샘플
 		$( ".check-visit" ).on( "click", function( e ) {
 			e.stopPropagation(); //shrink 동작 방지
-			alert( "방문확인" );
-			$( this ).addClass( "after" ); //방문확인 완료 아이콘 및 메시지 표시
+			$document.trigger( "beforerefresh" ); //페이지 리프레시 준비 요청 이벤트
+			location.href = "ocbt://com.skmc.okcashbag.home_google/detail/myLeaflet?title=NATE&url=http://m.okcashbag.com" //새창 띄우기
+			$( this ).addClass( "after" ); //방문확인 완료 아이콘 및 메시지 표시, 상용에서는 페이지 리프레시 시 처리
 		});
 
 		$( ".check-barcode" ).on( "click", function( e ) {
 			e.stopPropagation(); //shrink 동작 방지
-			alert( "바코드확인" );
-			$( this ).addClass( "after" ); //바코드확인 완료 아이콘 및 메시지 표시
+			$document.trigger( "beforerefresh" ); //페이지 리프레시 준비 요청 이벤트
+			location.href = "ocbt://com.skmc.okcashbag.home_google/detail/myLeaflet?title=NATE&url=http://mgifticon.syrup.co.kr" //새창 띄우기
+
+			$( this ).addClass( "after" ); //바코드확인 완료 아이콘 및 메시지 표시, 상용에서는 페이지 리프레시 시 처리
 		});
 
 
